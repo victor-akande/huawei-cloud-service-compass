@@ -1,0 +1,5 @@
+{
+  "name": "Huawei Cloud Service Compass",
+  "description": "An interactive decision support tool for selecting optimal Huawei Cloud services based on architectural scenarios and business constraints.",
+  "requestFramePermissions": []
+}
