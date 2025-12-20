@@ -5,7 +5,7 @@ import { ScenarioCard } from './components/ScenarioCard';
 import { Wizard } from './components/Wizard';
 import { Glossary } from './components/Glossary';
 import { ServiceComparison } from './components/ServiceComparison';
-import { LayoutGrid, GitBranch, Search, Cloud, BookOpen, Scale } from 'lucide-react';
+import { LayoutGrid, GitBranch, Search, Cloud, BookOpen, Scale, Menu, X } from 'lucide-react';
 
 const categories: Category[] = [
   'Compute', 'Storage', 'Networking', 'Database', 'Intelligence', 'Security', 'Middleware', 'Developer Services'
@@ -17,6 +17,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<Tab>('explorer');
   const [selectedCategory, setSelectedCategory] = useState<Category | 'All'>('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // State for Service Comparison
   const [comparisonIds, setComparisonIds] = useState<string[]>([]);
@@ -56,7 +57,7 @@ export default function App() {
               <h1 className="text-lg font-bold tracking-tight">Huawei Cloud <span className="text-slate-400 font-light">Service Compass</span></h1>
             </div>
           </div>
-          <nav className="flex space-x-1 bg-slate-800 p-1 rounded-lg overflow-x-auto">
+          <nav className="hidden md:flex space-x-1 bg-slate-800 p-1 rounded-lg overflow-x-auto">
             <button
               onClick={() => setActiveTab('explorer')}
               className={`px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center whitespace-nowrap ${activeTab === 'explorer' ? 'bg-slate-600 text-white' : 'text-slate-400 hover:text-white'}`}
@@ -91,7 +92,52 @@ export default function App() {
               )}
             </button>
           </nav>
+          <button
+            className="md:hidden p-2 rounded-md text-slate-400 hover:text-white"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-slate-800 text-white border-t border-slate-700">
+            <div className="px-4 py-2 space-y-1">
+              <button
+                onClick={() => { setActiveTab('explorer'); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${activeTab === 'explorer' ? 'bg-slate-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              >
+                <LayoutGrid className="h-4 w-4 mr-2" />
+                Scenarios
+              </button>
+              <button
+                onClick={() => { setActiveTab('wizard'); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${activeTab === 'wizard' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              >
+                <GitBranch className="h-4 w-4 mr-2" />
+                Decision Tree
+              </button>
+              <button
+                onClick={() => { setActiveTab('glossary'); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${activeTab === 'glossary' ? 'bg-green-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              >
+                <BookOpen className="h-4 w-4 mr-2" />
+                Glossary
+              </button>
+              <button
+                onClick={() => { setActiveTab('comparison'); setIsMobileMenuOpen(false); }}
+                className={`block w-full text-left px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center relative ${activeTab === 'comparison' ? 'bg-purple-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              >
+                <Scale className="h-4 w-4 mr-2" />
+                Compare
+                {comparisonIds.length > 0 && (
+                  <span className="ml-2 bg-red-500 text-white text-[10px] px-1.5 rounded-full">
+                    {comparisonIds.length}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       {/* Main Content */}
