@@ -26,8 +26,8 @@ Cloud architects, IT professionals, developers, and enterprises migrating to or 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/victor-akande/huawei-cloud-architect-tool.git
-   cd huawei-cloud-architect-tool
+   git clone https://github.com/victor-akande/huawei-cloud-service-compass.git
+   cd huawei-cloud-service-compass
    ```
 
 2. Install dependencies:
@@ -64,5 +64,5 @@ This project is open-source. Contributions are welcome! Please fork the reposito
 
 ## Contact
 
-Built and maintained by [Victor Akande](https://www.linkedin.com/in/avictorx).</content>
-<parameter name="filePath">/workspaces/huawei-cloud-architect-tool/README.md
+Built and maintained by [Victor Akande](https://www.linkedin.com/in/avictorx).
+
